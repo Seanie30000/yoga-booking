@@ -1,17 +1,17 @@
 
 {{> head}}
 {{> header}}
-
+<main>
 <h1>Booking Confirmation</h1>
-<p>Your booking has been created.</p>
+<p>Your booking has been created successfully.</p>
 
 <dl class="kv">
-  <dt>ID</dt><dd>{{booking.id}}</dd>
-  <dt>Type</dt><dd>{{booking.type}}</dd>
-  <dt>Status</dt><dd>{{booking.status}}</dd>
-  <dt>Created</dt><dd>{{booking.createdAt}}</dd>
+    <dt>ID</dt><dd>{{booking.id}}</dd>
+    <dt>Type</dt><dd>{{booking.type}}</dd>
+    <dt>Status</dt><dd>{{booking.status}}</dd>
+    <dt>Created</dt><dd>{{booking.createdAt}}</dd>
 </dl>
 
-<p><a class="btn" href></p>
-
-{{>
+<a class="btn" href="/">Back to Home</a>
+</main>
+{{> footer}}

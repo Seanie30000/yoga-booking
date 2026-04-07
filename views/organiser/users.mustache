@@ -1,0 +1,39 @@
+
+{{> head}}
+{{> header}}
+<main>
+    <h1>Manage Users</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#users}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{email}}</td>
+                <td>{{role}}</td>
+                <td>
+                    <form action="/organiser/users/{{id}}/role" method="post" style="display:inline">
+                        <select name="role">
+                            <option value="student">Student</option>
+                            <option value="organiser">Organiser</option>
+                            <option value="instructor">Instructor</option>
+                        </select>
+                        <button type="submit" class="btn">Change Role</button>
+                    </form>
+                    <form action="/organiser/users/{{id}}/delete" method="post" style="display:inline">
+                        <button type="submit" class="btn danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {{/users}}
+        </tbody>
+    </table>
+</main>
+{{> footer}}

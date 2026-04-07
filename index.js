@@ -74,12 +74,16 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 // import authRoutes from './routes/auth.js';
+import authRoutes from './routes/auth.js';
+import organiserRoutes from './routes/organiser.js';
 import courseRoutes from "./routes/courses.js";
 import sessionRoutes from "./routes/sessions.js";
 import bookingRoutes from "./routes/bookings.js";
 import viewRoutes from "./routes/views.js";
-import { attachDemoUser } from "./middlewares/demoUser.js";
 import { initDb } from "./models/_db.js";
+import { attachUser } from './middlewares/authMiddleware.js';
+
+import session from 'express-session';
 
 dotenv.config();
 
@@ -101,20 +105,29 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 
+app.use(session({
+    secret: 'yoga-secret-key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }
+}));
+
+app.use(attachUser);
+
 // Static
 app.use("/static", express.static(path.join(__dirname, "public")));
 
-// Demo user
-app.use(attachDemoUser);
-
 // Health
 app.get("/health", (req, res) => res.json({ ok: true }));
+app.get('/login', (req, res) => res.redirect('/auth/login'));
+app.get('/register', (req, res) => res.redirect('/auth/register'));
 
 // JSON API routes
-// app.use('/auth', authRoutes);
-app.use("/courses", courseRoutes);
+app.use('/auth', authRoutes);
+app.use("/api/courses", courseRoutes);
 app.use("/sessions", sessionRoutes);
 app.use("/bookings", bookingRoutes);
+app.use('/organiser', organiserRoutes);
 
 // SSR view routes
 app.use("/", viewRoutes);

@@ -23,6 +23,23 @@ const fmtDateTime = (iso) =>
       })
     : "TBA";
 
+const fmtLevel = (level) => {
+    const levels = {
+        beginner: "Beginner",
+        intermediate: "Intermediate",
+        advanced: "Advanced"
+    };
+    return levels[level] || level;
+};
+
+const fmtType = (type) => {
+    const types = {
+        WEEKLY_BLOCK: "Weekly Block",
+        WEEKEND_WORKSHOP: "Weekend Workshop"
+    };
+    return types[type] || type;
+};
+
 export const coursesListPage = async (req, res, next) => {
   try {
     // Query params for filters/pagination
@@ -83,8 +100,8 @@ export const coursesListPage = async (req, res, next) => {
         return {
           id: c._id,
           title: c.title,
-          level: c.level,
-          type: c.type,
+          level: fmtLevel(c.level),
+          type: fmtType(c.type),
           allowDropIn: c.allowDropIn,
           startDate: fmtDateOnly(c.startDate),
           endDate: fmtDateOnly(c.endDate),

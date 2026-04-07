@@ -1,0 +1,32 @@
+
+{{> head}}
+{{> header}}
+<main>
+    <h1>Class List</h1>
+    <h2>{{course.title}}</h2>
+    <p>{{session.start}} — {{session.end}}</p>
+    <a href="/organiser/courses" class="btn">Back to Courses</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#participants}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{email}}</td>
+            </tr>
+            {{/participants}}
+            {{^participants}}
+            <tr>
+                <td colspan="2">No participants booked for this session yet.</td>
+            </tr>
+            {{/participants}}
+        </tbody>
+    </table>
+</main>
+{{> footer}}

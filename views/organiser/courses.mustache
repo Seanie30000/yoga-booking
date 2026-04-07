@@ -1,0 +1,34 @@
+
+{{> head}}
+{{> header}}
+<main>
+    <h1>Manage Courses</h1>
+    <a href="/organiser/courses/add" class="btn primary">Add New Course</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Level</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#courses}}
+            <tr>
+                <td>{{title}}</td>
+                <td>{{level}}</td>
+                <td>{{type}}</td>
+                <td>
+                    <a href="/organiser/courses/{{id}}/edit" class="btn">Edit</a>
+                    <a href="/organiser/courses/{{id}}/sessions" class="btn">Sessions</a>
+                    <form action="/organiser/courses/{{id}}/delete" method="post" style="display:inline">
+                        <button type="submit" class="btn danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {{/courses}}
+        </tbody>
+    </table>
+</main>
+{{> footer}}

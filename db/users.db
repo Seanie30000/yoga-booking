@@ -1,2 +1,5 @@
+{"name":"Ava","email":"ava@yoga.local","password":"$2b$10$kxBki72OMhv/dafUbvTo8..HUdKVcrAhKW7cflEAp9ucr4ZIHp3KK","role":"instructor","_id":"TkrioGndfCLaxBU3"}
+{"name":"Admin","email":"organiser@yoga.local","password":"$2b$10$LDUE5l2U5F7moxTsAs5dK.PeHk1Sib52DTtsJlX2potiRlpdcnBf2","role":"organiser","_id":"UAQgMu21tq3DgBwX"}
+{"name":"Fiona","email":"fiona@student.local","password":"$2b$10$gm67WoFUajSAnFn7p21ZTOs/3hO.44ZbWw0SrW3M172JVc3TP5HMe","role":"student","_id":"WD6f73NwF2A10AcO"}
+{"name":"Ben","email":"ben@yoga.local","password":"$2b$10$4wD/cNhv.kRupXhTvoRSSOLSo1syIxwk5phU1nSVs0OpdCTiru7h2","role":"instructor","_id":"igFeeLiueQKLQBN2"}
 {"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
-{"name":"Fiona","email":"fiona@student.local","role":"student","_id":"cqhGQKxArmgTO1Se"}

@@ -1,0 +1,51 @@
+
+{{> head}}
+{{> header}}
+<main>
+    <h1>Sessions for {{course.title}}</h1>
+    <a href="/organiser/courses" class="btn">Back to Courses</a>
+
+    <h2>Add New Session</h2>
+    <form action="/organiser/courses/{{course.id}}/sessions/add" method="post">
+        <label for="startDateTime">Start Date and Time</label>
+        <input type="datetime-local" id="startDateTime" name="startDateTime" required />
+
+        <label for="endDateTime">End Date and Time</label>
+        <input type="datetime-local" id="endDateTime" name="endDateTime" required />
+
+        <label for="capacity">Capacity</label>
+        <input type="number" id="capacity" name="capacity" value="20" min="1" required />
+
+        <button type="submit" class="btn primary">Add Session</button>
+    </form>
+
+    <h2>Existing Sessions</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Capacity</th>
+                <th>Booked</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#sessions}}
+            <tr>
+                <td>{{start}}</td>
+                <td>{{end}}</td>
+                <td>{{capacity}}</td>
+                <td>{{booked}}</td>
+                <td>
+                    <a href="/organiser/sessions/{{id}}/classlist" class="btn">Class List</a>
+                    <form action="/organiser/sessions/{{id}}/delete" method="post" style="display:inline">
+                        <button type="submit" class="btn danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {{/sessions}}
+        </tbody>
+    </table>
+</main>
+{{> footer}}

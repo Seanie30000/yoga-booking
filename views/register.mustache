@@ -1,0 +1,24 @@
+{{> head}}
+{{> header}}
+<main>
+    <div class="auth-box">
+        <h1>Register</h1>
+        {{#error}}
+            <div class="alert error">{{error}}</div>
+        {{/error}}
+        <form method="POST" action="/auth/register">
+            <label for="name">Name
+                <input type="text" id="name" name="name" required />
+            </label>
+            <label for="email">Email
+                <input type="email" id="email" name="email" required />
+            </label>
+            <label for="password">Password
+                <input type="password" id="password" name="password" required />
+            </label>
+            <button type="submit" class="btn primary">Register</button>
+        </form>
+        <p>Already have an account? <a href="/auth/login">Login here</a></p>
+    </div>
+</main>
+{{> footer}}

@@ -35,16 +35,31 @@ async function ensureDemoStudent() {
     student = await UserModel.create({
       name: "Fiona",
       email: "fiona@student.local",
+      password: "student123",
       role: "student",
     });
   }
   return student;
 }
 
+async function ensureOrganiser() {
+    let organiser = await UserModel.findByEmail("organiser@yoga.local");
+    if (!organiser) {
+        organiser = await UserModel.create({
+            name: "Admin",
+            email: "organiser@yoga.local",
+            password: "admin123",
+            role: "organiser",
+        });
+    }
+    return organiser;
+}
+
 async function createWeekendWorkshop() {
   const instructor = await UserModel.create({
     name: "Ava",
     email: "ava@yoga.local",
+    password: "instructor123",
     role: "instructor",
   });
   const course = await CourseModel.create({
@@ -83,6 +98,7 @@ async function createWeeklyBlock() {
   const instructor = await UserModel.create({
     name: "Ben",
     email: "ben@yoga.local",
+    password: "instructor123",
     role: "instructor",
   });
   const course = await CourseModel.create({
@@ -144,6 +160,9 @@ async function run() {
   console.log("Creating demo student…");
   const student = await ensureDemoStudent();
 
+  console.log("Creating organiser...");
+  const organiser = await ensureOrganiser();
+
   console.log("Creating weekend workshop…");
   const w = await createWeekendWorkshop();
 
@@ -166,6 +185,8 @@ async function run() {
     "(sessions:",
     b.sessions.length + ")"
   );
+
+  console.log("Organiser ID         :", organiser._id);
 }
 
 run().catch((err) => {

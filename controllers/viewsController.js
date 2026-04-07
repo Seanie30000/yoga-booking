@@ -23,6 +23,23 @@ const fmtDateOnly = (iso) =>
     day: "numeric",
   });
 
+const fmtLevel = (level) => {
+    const levels = {
+        beginner: "Beginner",
+        intermediate: "Intermediate",
+        advanced: "Advanced"
+    };
+    return levels[level] || level;
+};
+
+const fmtType = (type) => {
+    const types = {
+        WEEKLY_BLOCK: "Weekly Block",
+        WEEKEND_WORKSHOP: "Weekend Workshop"
+    };
+    return types[type] || type;
+};
+
 export const homePage = async (req, res, next) => {
   try {
     const courses = await CourseModel.list();
@@ -33,8 +50,8 @@ export const homePage = async (req, res, next) => {
         return {
           id: c._id,
           title: c.title,
-          level: c.level,
-          type: c.type,
+          level: fmtLevel(c.level),
+          type: fmtType(c.type),
           allowDropIn: c.allowDropIn,
           startDate: c.startDate ? fmtDateOnly(c.startDate) : "",
           endDate: c.endDate ? fmtDateOnly(c.endDate) : "",
@@ -70,19 +87,21 @@ export const courseDetailPage = async (req, res, next) => {
     }));
 
     res.render("course", {
-      title: course.title,
-      course: {
+    title: course.title,
+    course: {
         id: course._id,
         title: course.title,
-        level: course.level,
-        type: course.type,
+        level: fmtLevel(course.level),
+        type: fmtType(course.type),
         allowDropIn: course.allowDropIn,
         startDate: course.startDate ? fmtDateOnly(course.startDate) : "",
         endDate: course.endDate ? fmtDateOnly(course.endDate) : "",
         description: course.description,
-      },
-      sessions: rows,
-    });
+        location: course.location || "To be confirmed",
+        price: course.price ? `£${course.price.toFixed(2)}` : "Free",
+    },
+    sessions: rows,
+});
   } catch (err) {
     next(err);
   }
@@ -135,4 +154,8 @@ export const bookingConfirmationPage = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+export const aboutPage = (req, res) => {
+    res.render('about', { title: 'About Us' });
 };
