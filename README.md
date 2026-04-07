@@ -79,4 +79,4 @@ After seeding the database the following accounts are available:
 ## Deployment
 
 A live version of the site is available at:
-<your-deployment-url>
+<https://yoga-booking-l094.onrender.com>
